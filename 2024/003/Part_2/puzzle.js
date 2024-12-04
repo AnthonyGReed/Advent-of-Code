@@ -15,26 +15,17 @@ for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
             enabled = false;
         }
         if (row.substring(i, i + 4) == "mul(" && enabled) {
-            // console.log("mul( found!")
             var inner = row.substring(i + 4, i + 12).split(")")[0];
             if (inner.length <= 7) {
-                // console.log("( found adn removed")
                 var terms = inner.split(",");
-                if (terms[0].length < 4 && terms[0].length > 0 && terms[1].length < 4 && terms[1].length > 0 && terms.length == 2) {
-                    // console.log("terms are the right size")
+                if (terms.length == 2 && terms[0].length < 4 && terms[0].length > 0 && terms[1].length < 4 && terms[1].length > 0) {
                     var lengthBeforeA = terms[0].length;
                     var lengthBeforeB = terms[1].length;
                     var valueA = terms[0].trim();
                     var valueB = terms[1].trim();
                     if (valueA.length == lengthBeforeA && valueB.length == lengthBeforeB) {
-                        // console.log("terms didn't ahve spaces")
                         if (!isNaN(Number(terms[0])) && !isNaN(Number(terms[1]))) {
-                            console.log(row.substring(i, i + 12));
-                            // console.log("added to total")
-                            // console.log("Should tally and count");
-                            console.log(Number(terms[0]));
-                            console.log(Number(terms[1]));
-                            // console.log("---");
+                            console.log(terms[0] + ", " + terms[1]);
                             finalValue += (Number(terms[0]) * Number(terms[1]));
                         }
                     }
