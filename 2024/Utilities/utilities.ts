@@ -56,6 +56,10 @@ export class Coord {
     toString(): string {
         return `(${this._row}, ${this._col})`;
     }
+
+    equals(coord: Coord): boolean {
+        return coord.row === this.row && coord.col === this.col
+    }
 }
 
 export class CoordList {

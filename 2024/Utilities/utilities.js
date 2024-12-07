@@ -58,6 +58,9 @@ var Coord = /** @class */ (function () {
     Coord.prototype.toString = function () {
         return "(" + this._row + ", " + this._col + ")";
     };
+    Coord.prototype.equals = function (coord) {
+        return coord.row === this.row && coord.col === this.col;
+    };
     return Coord;
 }());
 exports.Coord = Coord;
