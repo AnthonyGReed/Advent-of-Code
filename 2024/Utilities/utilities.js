@@ -1,4 +1,11 @@
 "use strict";
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
 var fs = require("fs");
 var path = require("path");
@@ -103,3 +110,25 @@ var CoordList = /** @class */ (function () {
     return CoordList;
 }());
 exports.CoordList = CoordList;
+var Set = /** @class */ (function () {
+    function Set(getKey) {
+        this.items = [];
+        this.getKey = getKey;
+    }
+    Set.prototype.add = function (item) {
+        var _this = this;
+        var key = this.getKey(item);
+        if (!this.items.some(function (existing) { return _this.getKey(existing) === key; })) {
+            this.items.push(item);
+        }
+    };
+    Set.prototype.has = function (item) {
+        var _this = this;
+        return this.items.some(function (existing) { return _this.getKey(existing) === _this.getKey(item); });
+    };
+    Set.prototype.values = function () {
+        return __spreadArrays(this.items);
+    };
+    return Set;
+}());
+exports.Set = Set;
