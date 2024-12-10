@@ -118,6 +118,12 @@ export class Set<T> {
         }
     }
 
+    addAll(items: T[]) {
+        for(const item of items) {
+            this.add(item)
+        }
+    }
+
     has(item: T): boolean {
         return this.items.some(existing => this.getKey(existing) === this.getKey(item))
     }

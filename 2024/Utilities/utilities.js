@@ -122,6 +122,12 @@ var Set = /** @class */ (function () {
             this.items.push(item);
         }
     };
+    Set.prototype.addAll = function (items) {
+        for (var _i = 0, items_1 = items; _i < items_1.length; _i++) {
+            var item = items_1[_i];
+            this.add(item);
+        }
+    };
     Set.prototype.has = function (item) {
         var _this = this;
         return this.items.some(function (existing) { return _this.getKey(existing) === _this.getKey(item); });
