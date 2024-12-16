@@ -58,7 +58,7 @@ export class Coord {
     }
 
     equals(coord: Coord): boolean {
-        return coord.row === this.row && coord.col === this.col
+        return coord.row === this._row && coord.col === this._col
     }
 }
 

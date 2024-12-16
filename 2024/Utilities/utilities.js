@@ -66,7 +66,7 @@ var Coord = /** @class */ (function () {
         return "(" + this._row + ", " + this._col + ")";
     };
     Coord.prototype.equals = function (coord) {
-        return coord.row === this.row && coord.col === this.col;
+        return coord.row === this._row && coord.col === this._col;
     };
     return Coord;
 }());
