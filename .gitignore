@@ -129,6 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# IDEs and editors
+.vscode/
 
 # Puzzle Inputs
 *.txt
