@@ -14,7 +14,7 @@ function part1(input: string[]): number {
                 position -= value;
                 break;
         }
-        position %= 100;
+        position = mod(position, 100);
         if (position == 0) {
             total ++;
         }
