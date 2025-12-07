@@ -19,6 +19,17 @@ export function readFile(fileName: string): string[] {
     }
 }
 
+export function readFileRaw(fileName: string): string[] {
+        try {
+            const filePath = path.resolve(process.cwd(), fileName);
+            const content = fs.readFileSync(filePath, 'utf-8');
+            return content.split('\n')
+        } catch (error) {
+            console.error(`Error reading file at ${fileName}: `, error);
+            return [];
+        }
+}
+
 /**
  * Converts an array of strings into a 2D array of characters.
  * @param input - An array of strings.

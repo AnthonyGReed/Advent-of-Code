@@ -11,6 +11,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Set = exports.CoordList = exports.Coord = void 0;
 exports.readFile = readFile;
+exports.readFileRaw = readFileRaw;
 exports.toMatrix = toMatrix;
 exports.mod = mod;
 var fs = require("fs");
@@ -30,6 +31,17 @@ function readFile(fileName) {
     }
     catch (error) {
         console.error("Error reading file at ".concat(fileName, ":"), error);
+        return [];
+    }
+}
+function readFileRaw(fileName) {
+    try {
+        var filePath = path.resolve(process.cwd(), fileName);
+        var content = fs.readFileSync(filePath, 'utf-8');
+        return content.split('\n');
+    }
+    catch (error) {
+        console.error("Error reading file at ".concat(fileName, ": "), error);
         return [];
     }
 }
