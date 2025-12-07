@@ -15,7 +15,6 @@ function part1(input: string[]): number {
             total += (parseInt(matrix[0][i]) + parseInt(matrix[1][i]) + parseInt(matrix[2][i]) + parseInt(matrix[3][i]));
         }
     }
-    // implentation for part 1
     return total;
 }
 
@@ -31,8 +30,8 @@ function part2(input: string[]): number {
         for (let j = 0; j < matrix.length - 1; j++) {
             if(matrix[j][i] != " ") {
                 allSpaces = false;
-                let val = matrix[j][i].replaceAll('\n','').replaceAll('\r','')
-                if (val !== '') {
+                let val = matrix[j][i]
+                if (val !== '' && val !== '\r\r\r' && val !== '\n') {
                     value += val
                 }
             }
@@ -41,17 +40,38 @@ function part2(input: string[]): number {
             newProblem = false;
             problems.push([matrix[matrix.length-1][i]])
         }
-        problems[counter].push(value)
         if (allSpaces) {
             counter += 1
             newProblem = true;
+        } else {
+            problems[counter].push(value)
         }
     }
-    console.log(problems)
+    for (const problem of problems) {
+        if (problem[0] == '+') {
+            let value = 0;
+            for (let i = 1; i < problem.length; i++) {
+                value += parseInt(problem[i])
+            }
+            console.log(`Problem set ${problem} is equal to ${value}`)
+            total += value;
+        } else if (problem[0] == '*') {
+            let value = 0;
+            for (let i = 1; i < problem.length; i++) {
+                if (value === 0) {
+                    value = parseInt(problem[i])
+                } else {
+                    value *= parseInt(problem[i])
+                }
+            }
+            console.log(`Problem set ${problem} is equal to ${value}`)
+            total += value;
+        }
+    }
     return total;
 }
 
 
 console.log(part1(readFile('input.txt')));
 //readFile trims the lines and that breaks this puzzle so I won't be able to do do that on this one.
-console.log(part2(readFileRaw('test_input.txt')));
+console.log(part2(readFileRaw('input.txt')));
