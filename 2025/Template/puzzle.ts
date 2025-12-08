@@ -10,5 +10,8 @@ function part2(input: string[]): number {
     return 0;
 }
 
-console.log(part1(readFile('input.txt')));
-console.log(part2(readFile('input.txt')));
+console.log(part1(readFile('test_input.txt')));
+// console.log(part1(readFile('input.txt')));
+
+// console.log(part2(readFile('test_input.txt')));
+// console.log(part2(readFile('input.txt')));
