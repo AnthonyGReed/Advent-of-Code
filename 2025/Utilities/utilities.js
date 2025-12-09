@@ -65,6 +65,12 @@ export class Coord {
     equals(coord) {
         return coord.row === this._row && coord.col === this._col;
     }
+    getManhattanDistance(coord) {
+        return Math.abs(this._row - coord._row) + Math.abs(this._col - coord._col);
+    }
+    getRectangleArea(coord) {
+        return (Math.abs(this._row - coord._row) + 1) * (Math.abs(this._col - coord._col) + 1);
+    }
 }
 export class CoordList {
     coords = [];
@@ -86,6 +92,13 @@ export class CoordList {
      */
     sortByRow() {
         this.coords.sort((a, b) => a.row - b.row);
+    }
+    /**
+     * Returns the length of the coord list
+     * @returns length
+     */
+    length() {
+        return this.coords.length;
     }
     /**
      * Returns an iterator for the list.
