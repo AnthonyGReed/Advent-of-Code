@@ -1,4 +1,4 @@
-import { readFile } from "../Utilities/utilities"
+import { readFile } from "../Utilities/utilities.js"
 
 class Node {
     private x: number;
@@ -106,16 +106,20 @@ function part1(input: string[], iterationValue: number): number {
         }
     }
     let workComplete = false;
-    console.log(circuts)
     while (!workComplete) {
         let noWorkDone = true
         for (let i = 0; i < circuts.length - 1; i++) {
-            for(const nodeA of circuts[i]) {
-                for (const nodeB of circuts[i+1]) {
-                    if (nodeA.equals(nodeB)) {
-                        circuts[i+1].forEach((node) => circuts[i].add(node))
-                        circuts.splice(i+1, 1)
-                        noWorkDone = false
+            for (let j = i + 1; j < circuts.length; j++) {
+                for (const nodeA of circuts[i]) {
+                    console.log(j)
+                    console.log(circuts[j])
+                    for (const nodeB of circuts[j]) {
+                        if (nodeA.equals(nodeB)) {
+                            console.log("I DID THIS")
+                            circuts[i+1].forEach((node) => circuts[i].add(node))
+                            circuts.splice(i+1, 1)
+                            noWorkDone = false
+                        }
                     }
                 }
             }
