@@ -36,6 +36,12 @@ class Node {
         return `(${this.x}, ${this.y}, ${this.z})`;
     }
 }
+// function containsAll<T>(a: Set<T>, b:Set<T>): boolean {
+//     for (const element of b) {
+//         if (!a.has(element)) { return false; }
+//     }
+//     return true;
+// }
 class Connection {
     nodes = [];
     distance;
@@ -72,7 +78,7 @@ function part1(input, iterationValue) {
         connectedNodes[0].addConection(connectedNodes[1]);
         connectedNodes[1].addConection(connectedNodes[0]);
     }
-    const circuts = [];
+    let circuts = [];
     for (let i = 0; i < iterationValue; i++) {
         const connection = connections[i];
         const nodes = connection.getNodes();
@@ -94,30 +100,42 @@ function part1(input, iterationValue) {
             circuts.push(network);
         }
     }
+    // This logic is the problem, we need to be able to loop through and merge if any element of the array match any other array.
     let workComplete = false;
     while (!workComplete) {
         let noWorkDone = true;
-        for (let i = 0; i < circuts.length - 1; i++) {
+        const workingSet = [];
+        for (let i = 0; i < circuts.length; i++) {
+            let mergeFound = false;
             for (let j = i + 1; j < circuts.length; j++) {
-                for (const nodeA of circuts[i]) {
-                    console.log(j);
-                    console.log(circuts[j]);
-                    for (const nodeB of circuts[j]) {
-                        if (nodeA.equals(nodeB)) {
-                            console.log("I DID THIS");
-                            circuts[i + 1].forEach((node) => circuts[i].add(node));
-                            circuts.splice(i + 1, 1);
-                            noWorkDone = false;
-                        }
+                // if (containsAll(circuts[i], circuts[j])) {
+                //     mergeFound = true;
+                //     workingSet.push(circuts[j])
+                // }
+                for (const node of circuts[i]) {
+                    if (circuts[j].has(node)) {
+                        mergeFound = true;
                     }
                 }
+                if (mergeFound) {
+                    circuts[i].forEach((node) => circuts[j].add(node));
+                    workingSet.push(circuts[j]);
+                    noWorkDone = false;
+                }
+            }
+            if (!mergeFound) {
+                workingSet.push(circuts[i]);
             }
         }
         if (noWorkDone) {
             workComplete = true;
         }
+        else {
+            circuts = workingSet;
+        }
+        console.log(circuts.length);
+        console.log(circuts);
     }
-    console.log(circuts);
     return finalValue;
 }
 function part2(input) {
